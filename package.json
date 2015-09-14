@@ -8,7 +8,7 @@
     "url": "https://github.com/imkrimerman/im.Class.git"
   },
   "scripts": {
-    "debug": "node ./test.js"
+    "test": "mocha"
   },
   "keywords": [
     "es5",
@@ -26,5 +26,8 @@
     "class-extend": "^0.1.1",
     "im.val": "^1.0.1",
     "lodash": "^3.10.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.3.2"
   }
 }

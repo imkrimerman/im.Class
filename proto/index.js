@@ -1,4 +1,5 @@
 'use strict'
+var _ = require('lodash');
 /***************************************************************************
  *
  * Prototype
@@ -15,7 +16,7 @@ var Prototype = {
  */
 module.exports.apply = function(mixin) {
   for (var method in Prototype) {
-    if (mixin.method) continue;
+    if (_.has(mixin, method)) continue;
     mixin[method] = Prototype[method];
   }
   return mixin;

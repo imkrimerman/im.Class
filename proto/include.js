@@ -9,28 +9,27 @@ var val = require('im.val')
 /**
  * Includes mixin to class.
  *
- * @param {Object} object
  * @param {Object} mixin
  * @param {String|null|undefined} key
  * @returns {Object}
  */
-module.exports = function(object, mixin, key) {
-  var hasKey = false,
-    obj = object;
+module.exports = function(mixin, key) {
+  var hasKey = false
+    , obj = this;
 
   mixin = val(mixin, {});
-  key = val(key, null);
+  key = val(key);
 
-  if (key !== null && _.has(obj, key) && _.isObject(obj[key])) {
+  if (key !== val.notDefined && _.has(this, key) && _.isObject(this[key])) {
     hasKey = true;
-    obj = _.clone(object[key]);
+    obj = _.cloneDeep(this[key]);
   }
 
   for (var mixinKey in mixin) {
-    obj[key] = mixin[mixinKey];
+    obj[mixinKey] = mixin[mixinKey];
   }
 
-  if (hasKey) object[key] = obj;
+  if (hasKey) this[key] = obj;
 
-  return object;
+  return this;
 };
