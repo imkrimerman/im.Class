@@ -1,0 +1,30 @@
+{
+  "name": "im.Class",
+  "version": "1.0.0",
+  "description": "Node JS ES5 Classes with 'extend' inheritance",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imkrimerman/im.Class.git"
+  },
+  "scripts": {
+    "debug": "node ./test.js"
+  },
+  "keywords": [
+    "es5",
+    "class",
+    "extend",
+    "inherit"
+  ],
+  "author": "Igor Krimerman <i.m.krimerman@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/imkrimerman/im.Class/issues"
+  },
+  "homepage": "https://github.com/imkrimerman/im.Class",
+  "dependencies": {
+    "class-extend": "^0.1.1",
+    "im.val": "^1.0.1",
+    "lodash": "^3.10.1"
+  }
+}
