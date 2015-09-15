@@ -1,7 +1,11 @@
 'use strict'
 /***************************************************************************
  *
- * Classes
+ * Source
  *
  **************************************************************************/
-module.exports = require('./src');
+module.exports = {
+  Class: require('./Class'),
+  EventClass: require('./EventClass'),
+  Map: require('./Map'),
+};
