@@ -30,6 +30,7 @@ Event.include({
 });
 
 console.log(Event.get());
+// Logs { key: 'value' }
 ```
 
 Using Emitter Class
