@@ -14,7 +14,9 @@
     "es5",
     "class",
     "extend",
-    "inherit"
+    "inherit",
+    "map",
+    "emitter"
   ],
   "author": "Igor Krimerman <i.m.krimerman@gmail.com>",
   "license": "MIT",
