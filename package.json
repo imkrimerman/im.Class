@@ -1,5 +1,5 @@
 {
-  "name": "im.Class",
+  "name": "im.class",
   "version": "1.0.0",
   "description": "Node JS ES5 Classes with 'extend' inheritance",
   "main": "index.js",
