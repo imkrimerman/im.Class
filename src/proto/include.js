@@ -25,7 +25,11 @@ module.exports = function(mixin, key) {
   }
 
   for (var mixinKey in mixin) {
-    obj[mixinKey] = mixin[mixinKey];
+    var mixinValue = mixin[mixinKey];
+    if (_.isFunction(mixinValue)) {
+      mixinValue = mixinValue.bind(this);
+    }
+    obj[mixinKey] = mixinValue;
   }
 
   if (hasKey) this[key] = obj;

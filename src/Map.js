@@ -17,6 +17,14 @@ module.exports = Class.extend({
   },
 
   /**
+   * Returns all.
+   * @returns {Object}
+   */
+  all: function() {
+    return this.__items__;
+  },
+
+  /**
    * Returns item.
    * @param {String} key - i.e. 'key' or 'key.inner.val'
    * @param {*} defaults - default value that will be returned if key is not exists
