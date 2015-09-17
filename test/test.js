@@ -9,10 +9,10 @@ describe('im.Class', function() {
 
   it('Should create both valid Classes', function() {
     var Class = new classes.Class()
-      , EventClass = new classes.EventClass();
+      , EventClass = new classes.EventEmitterClass();
 
     equal(true, Class instanceof classes.Class);
-    equal(true, EventClass instanceof classes.EventClass);
+    equal(true, EventClass instanceof classes.EventEmitterClass);
     equal(true, _.contains(_.methods(EventClass), 'emit', 'on', 'once'));
   });
 
@@ -20,11 +20,11 @@ describe('im.Class', function() {
     var newClass = classes.Class.extend({
         newMethod: function() {}
       })
-      , newEventClass = classes.EventClass.extend({
+      , newEventEmitterClass = classes.EventEmitterClass.extend({
         newMethod: function() {}
       })
       , classMethods = _.methods(new newClass())
-      , eventClassMethods = _.methods(new newEventClass());
+      , eventClassMethods = _.methods(new newEventEmitterClass());
 
     equal(true, _.contains(classMethods, 'newMethod'));
     equal(true, _.contains(eventClassMethods, 'newMethod'));
@@ -32,9 +32,9 @@ describe('im.Class', function() {
 
   it('Should have working include method', function() {
     var Class = new classes.Class()
-      , EventClass = new classes.EventClass()
+      , EventEmitterClass = new classes.EventEmitterClass()
       , classMethods = _.methods(Class)
-      , eventClassMethods = _.methods(EventClass);
+      , eventClassMethods = _.methods(EventEmitterClass);
 
     equal(true, _.contains(classMethods, 'include'));
     equal(true, _.contains(eventClassMethods, 'include'));
@@ -44,12 +44,12 @@ describe('im.Class', function() {
       methods: {}
     });
 
-    EventClass.include({
+    EventEmitterClass.include({
       mixin: 'new'
     });
 
     equal(true, _.has(Class, 'mixin'));
-    equal(true, _.has(EventClass, 'mixin'));
+    equal(true, _.has(EventEmitterClass, 'mixin'));
 
     Class.include({
       foo: function() {}
@@ -58,13 +58,26 @@ describe('im.Class', function() {
     equal(true, _.has(Class.methods, 'foo'));
   });
 
-  it('EventClass should emit events using $fire method', function(done) {
-    var EventClass = new classes.EventClass();
-    EventClass.on('event', function(self) {
-      equal(EventClass, self);
-      done()
+  it('EventEmitterClass should emit events using $fire method and listen using $when and $after', function(done) {
+    var EventEmitterClass = new classes.EventEmitterClass()
+      , count = 0;
+
+    EventEmitterClass.$when('event', function(self) {
+      ++count;
+      if (count === 2) {
+        self.$fire('done', { done: done, self: self });
+        return;
+      }
     });
-    EventClass.$fire('event');
+
+    EventEmitterClass.$fire('event', { self: this });
+
+    EventEmitterClass.$after('done', function(event) {
+      equal(EventEmitterClass, event.self);
+      event.done();
+    });
+
+    EventEmitterClass.$fire('event');
   });
 
   it('Should create working Map', function() {
@@ -95,5 +108,9 @@ describe('im.Class', function() {
     equal(false, Map.has('key.arr[0].one'));
     Map.forget('key.arr');
     equal(false, Map.has('key.arr'));
+    Map.reset({ key: 'new' });
+    equal(true, Map.has('key'));
+    Map.reset();
+    equal(0, Map.size());
   });
 });

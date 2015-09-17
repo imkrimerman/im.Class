@@ -96,6 +96,14 @@ module.exports = Class.extend({
   },
 
   /**
+   * Returns size of Map
+   * @returns {Integer}
+   */
+  size: function() {
+    return _.size(this.__items__);
+  },
+
+  /**
    * Sets inner items to given items.
    * @param Object object
    * @private

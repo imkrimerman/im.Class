@@ -6,6 +6,6 @@
  **************************************************************************/
 module.exports = {
   Class: require('./Class'),
-  EventClass: require('./EventClass'),
+  EventEmitterClass: require('./EventEmitterClass'),
   Map: require('./Map'),
 };
