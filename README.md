@@ -62,9 +62,9 @@ Emitter.$fire('include', { mixin: mixin });
 Emitter.$fire('default');
 
 // Logs:
-// $when: Key
-// $after: Key
-// $when: Key
+// $when: { mixed: 'Key' }
+// $after: { mixed: 'Key' }
+// $when: { mixed: 'Key' }
 // Default value for data is Emitter that emitted event: true 
 ```
 
