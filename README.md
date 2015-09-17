@@ -1,15 +1,15 @@
-# im.Class
+# im.class
 Node JS ES5 Classes with 'extend' inheritance
 
 ### Installation:
 ```
-npm install --save im.Class
+npm install --save im.class
 ```
 
 ### Usage:
 Simple Event Class
 ```js
-var Class = require('im.Class').Class
+var Class = require('im.class').Class
   , EventClass;
 
 EventClass = Class.extend({
@@ -35,7 +35,7 @@ console.log(Event.get());
 
 Using Emitter Class
 ```js
-var EmitterClass = require('im.Class').EmitterClass
+var EmitterClass = require('im.class').EmitterClass
   , Emitter = new EmitterClass()
   , mixin = { mixed: 'Key' };
 
@@ -70,7 +70,7 @@ Emitter.$fire('default');
 
 Using Map Class
 ```js
-var Map = require('./index').Map;
+var Map = require('im.class').Map;
 
 var Config = new Map({
   shell: {
