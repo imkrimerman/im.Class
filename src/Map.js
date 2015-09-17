@@ -11,7 +11,7 @@ module.exports = Class.extend({
   /**
    * Map constructor.
    */
-  constructor: function(items) {
+  constructor: function _Map (items) {
     Class.apply(this);
     this.reset(items);
   },
@@ -19,53 +19,52 @@ module.exports = Class.extend({
   /**
    * Returns item.
    * @param {String} key - i.e. 'key' or 'key.inner.val'
-   * @param {*} defaults
+   * @param {*} defaults - default value that will be returned if key is not exists
    * @returns {*}
    */
-  get: function(key, defaults) {
+  get: function get (key, defaults) {
     return _.get(this.__items__, key, defaults);
   },
 
   /**
    * Sets item.
-   * @param key
-   * @param value
-   * @returns {Object}
+   * @param {String} key - i.e. 'key' or 'key.inner.val'
+   * @param {*} value - value to set at key
+   * @returns {Map}
    */
-  set: function(key, value) {
+  set: function set (key, value) {
     _.set(this.__items__, key, value);
     return this;
   },
 
   /**
-   * Push items.
-   * @param key
-   * @param value
-   * @returns {Object}
+   * Push object.
+   * @param {Object} object - object to push
+   * @returns {Map}
    */
-  push: function(items) {
-    if (! _.isObject(items)) return this;
-    for(var key in items) {
-      this.set(key, items[key]);
+  push: function push (object) {
+    if (! _.isObject(object)) return this;
+    for(var key in object) {
+      this.set(key, object[key]);
     }
     return this;
   },
 
   /**
    * Checks if Map has variable.
-   * @param {String} key
+   * @param {String} key - i.e. 'key' or 'key.inner.val'
    * @returns {boolean}
    */
-  has: function(key) {
+  has: function has (key) {
     return _.has(this.__items__, key);
   },
 
   /**
-   * Forget item
-   * @param {String} key
-   * @returns {exports}
+   * Forget item.
+   * @param {String} key - i.e. 'key' or 'key.inner.val'
+   * @returns {Map}
    */
-  forget: function(key) {
+  forget: function forget (key) {
     if (! this.has(key)) return this;
     if (! ~key.indexOf('.') && ! ~key.indexOf('[')) {
       delete this.__items__[key];
@@ -83,15 +82,12 @@ module.exports = Class.extend({
   },
 
   /**
-   * Resets Map.
-   * @param {Object} items
+   * Resets Map with given object.
+   * @param {Object} object - object to reset
    * @returns {exports}
    */
-  reset: function(items) {
-    if (val(items) !== val.notDefined && _.isObject(items)) {
-      this.__reset(items);
-    }
-    else this.__reset({});
+  reset: function reset (object) {
+    this.__reset(val(object, {}, _.isObject));
     return this;
   },
 
@@ -99,13 +95,13 @@ module.exports = Class.extend({
    * Returns size of Map
    * @returns {Integer}
    */
-  size: function() {
+  size: function size () {
     return _.size(this.__items__);
   },
 
   /**
    * Sets inner items to given items.
-   * @param Object object
+   * @param {Object} object - object to reset
    * @private
    */
   __reset: function(object) {
@@ -114,7 +110,7 @@ module.exports = Class.extend({
 
   /**
    * Converts string path to array
-   * @param str
+   * @param {String} str - string to convert to path
    * @returns {Array}
    * @private
    */

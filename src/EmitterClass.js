@@ -13,39 +13,39 @@ var EventEmitter = require('events').EventEmitter
  * Event Class
  * @constructor
  */
-function EventEmitterClass () {
+function EmitterClass () {
   EventEmitter.call(this);
 };
 
 /**
- * Extend EventEmitterClass prototype from EventEmitter prototype
+ * Extend EmitterClass prototype from EventEmitter prototype
  */
-_.extend(EventEmitterClass.prototype, EventEmitter.prototype);
+_.extend(EmitterClass.prototype, EventEmitter.prototype);
 
 /**
  * Inheritance method
  */
-EventEmitterClass.extend = extend;
+EmitterClass.extend = extend;
 
 /**
  * Wrapped Event Class
  */
-module.exports = EventEmitterClass.extend(Proto.apply({
+module.exports = EmitterClass.extend(Proto.apply({
 
   /**
-   * EventEmitterClass Constructor.
+   * EmitterClass Constructor.
    */
-  constructor: function _EventClass () {
-    EventEmitterClass.call(this);
+  constructor: function _EmitterClass () {
+    EmitterClass.call(this);
   },
 
   /**
    * Fire event.
-   * @param {String} event
-   * @param {*} data
-   * @returns {EventEmitterClass}
+   * @param {String} event - event to fire
+   * @param {*} data - will be emitted with event, if not provided will be set to this
+   * @returns {EmitterClass}
    */
-  $fire: function(event, data) {
+  $fire: function $fire (event, data) {
     if (! _.isString(event)) return this;
     if (val(data) === val.notDefined) data = this;
     this.emit(event, data);
@@ -54,11 +54,11 @@ module.exports = EventEmitterClass.extend(Proto.apply({
 
   /**
    * Alias for Event Emitter 'on' method
-   * @param {String} event
-   * @param {Function} cb
-   * @returns {EventEmitterClass}
+   * @param {String} event - event name to listen
+   * @param {Function} cb - callback to invoke on event
+   * @returns {EmitterClass}
    */
-  $when: function(event, cb) {
+  $when: function $when (event, cb) {
     if (! _.isString(event)) return this;
     this.on(event, val(cb, _.noop, _.isFunction));
     return this;
@@ -66,11 +66,11 @@ module.exports = EventEmitterClass.extend(Proto.apply({
 
   /**
    * Alias for Event Emitter 'once' method
-   * @param {String} event
-   * @param {Function} cb
-   * @returns {EventEmitterClass}
+   * @param {String} event - event name to listen
+   * @param {Function} cb - callback to invoke on event
+   * @returns {EmitterClass}
    */
-  $after: function(event, cb) {
+  $after: function $after (event, cb) {
     if (! _.isString(event)) return this;
     this.once(event, val(cb, _.noop, _.isFunction));
     return this;

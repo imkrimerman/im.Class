@@ -8,9 +8,8 @@ var val = require('im.val')
  **************************************************************************/
 /**
  * Includes mixin to class.
- *
- * @param {Object} mixin
- * @param {String|null|undefined} key
+ * @param {Object} mixin - object to mix with
+ * @param {String|null|undefined} key - if provided will be mixed with given value of key
  * @returns {Object}
  */
 module.exports = function(mixin, key) {

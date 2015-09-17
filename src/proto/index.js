@@ -11,7 +11,7 @@ var Prototype = {
 
 /**
  * Mix prototype
- * @param {Object} mixin
+ * @param {Object} mixin - additional proto
  * @returns {Object}
  */
 module.exports.apply = function(mixin) {
